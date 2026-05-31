@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "./data/portfolio";
+
+const siteUrl = "https://vadivel-portfolio.vercel.app";
 
 export default function robots(): MetadataRoute.Robots {
   return {

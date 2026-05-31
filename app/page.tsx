@@ -21,23 +21,32 @@ import ContactFormClient from "./components/ContactFormClient";
 export const metadata: Metadata = {
   title: "Vadivel T | Web Developer Portfolio",
   description:
-    "Explore Vadivel T’s web developer portfolio featuring WordPress, Next.js, PHP, MySQL, automation, AI workflows, SEO, hosting, and performance projects.",
+    "Web Developer with 4+ years of experience in WordPress, PHP, Next.js, SEO optimization, automation workflows, AI-assisted development, MCP servers, Docker, Linux, and web hosting.",
   alternates: {
     canonical: `${siteUrl}/`,
   },
   openGraph: {
     title: "Vadivel T | Web Developer Portfolio",
     description:
-      "Explore Vadivel T’s web developer portfolio featuring WordPress, Next.js, PHP, MySQL, automation, AI workflows, SEO, hosting, and performance projects.",
+      "Web Developer with 4+ years of experience in WordPress, PHP, Next.js, SEO optimization, automation workflows, AI-assisted development, MCP servers, Docker, Linux, and web hosting.",
     url: `${siteUrl}/`,
     siteName: "Vadivel Portfolio",
     type: "website",
+    images: [
+      {
+        url: `${siteUrl}/images/og/vadivel-webdeveloper-og.webp`,
+        width: 1200,
+        height: 630,
+        alt: "Vadivel T Web Developer Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Vadivel T | Web Developer Portfolio",
     description:
-      "Explore Vadivel T’s web developer portfolio featuring WordPress, Next.js, PHP, MySQL, automation, AI workflows, SEO, hosting, and performance projects.",
+      "Web Developer with 4+ years of experience in WordPress, PHP, Next.js, SEO optimization, automation workflows, AI-assisted development, MCP servers, Docker, Linux, and web hosting.",
+    images: [`${siteUrl}/images/og/vadivel-webdeveloper-og.webp`],
   },
   robots: {
     index: true,
@@ -50,7 +59,6 @@ export const metadata: Metadata = {
     },
   },
 };
-
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
