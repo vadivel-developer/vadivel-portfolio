@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ProjectItem = {
   title: string;
@@ -24,6 +24,10 @@ export default function ProjectSlider({ projects }: ProjectSliderProps) {
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [slidesPerView, setSlidesPerView] = useState(1);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     const updateSlidesPerView = () => {
@@ -87,13 +91,45 @@ export default function ProjectSlider({ projects }: ProjectSliderProps) {
     );
   };
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setIsPaused(true);
+    touchEndX.current = null;
+    touchStartX.current = event.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchEndX.current = event.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    setIsPaused(false);
+
+    if (touchStartX.current === null || touchEndX.current === null) {
+      return;
+    }
+
+    const distance = touchStartX.current - touchEndX.current;
+
+    if (distance > minSwipeDistance) {
+      goNext();
+    }
+
+    if (distance < -minSwipeDistance) {
+      goPrev();
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
     <div
-      className="w-full"
+      className="w-full touch-pan-y"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div className="mb-5 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
@@ -112,28 +148,28 @@ export default function ProjectSlider({ projects }: ProjectSliderProps) {
         </div>
 
         {validProjects.length > slidesPerView && (
-  <div className="flex w-full items-center justify-end gap-3 md:w-auto">
-    <button
-      type="button"
-      onClick={goPrev}
-      aria-label="Previous project"
-      suppressHydrationWarning
-      className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-[var(--heading)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-    >
-      <i className="fa-solid fa-chevron-left text-sm" />
-    </button>
+          <div className="flex w-full items-center justify-end gap-3 md:w-auto">
+            <button
+              type="button"
+              onClick={goPrev}
+              aria-label="Previous project"
+              suppressHydrationWarning
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-[var(--heading)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <i className="fa-solid fa-chevron-left text-sm" />
+            </button>
 
-    <button
-      type="button"
-      onClick={goNext}
-      aria-label="Next project"
-      suppressHydrationWarning
-      className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-[var(--heading)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
-    >
-      <i className="fa-solid fa-chevron-right text-sm" />
-    </button>
-  </div>
-)}
+            <button
+              type="button"
+              onClick={goNext}
+              aria-label="Next project"
+              suppressHydrationWarning
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-[var(--heading)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <i className="fa-solid fa-chevron-right text-sm" />
+            </button>
+          </div>
+        )}
       </div>
 
       <div

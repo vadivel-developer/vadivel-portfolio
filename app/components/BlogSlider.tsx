@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type BlogItem = {
   title: string;
@@ -22,6 +22,10 @@ export default function BlogSlider({ blogs }: BlogSliderProps) {
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState<"next" | "prev">("next");
   const [slidesPerView, setSlidesPerView] = useState(1);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const minSwipeDistance = 50;
 
   useEffect(() => {
     const updateSlidesPerView = () => {
@@ -85,13 +89,45 @@ export default function BlogSlider({ blogs }: BlogSliderProps) {
     );
   };
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setIsPaused(true);
+    touchEndX.current = null;
+    touchStartX.current = event.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchEndX.current = event.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    setIsPaused(false);
+
+    if (touchStartX.current === null || touchEndX.current === null) {
+      return;
+    }
+
+    const distance = touchStartX.current - touchEndX.current;
+
+    if (distance > minSwipeDistance) {
+      goNext();
+    }
+
+    if (distance < -minSwipeDistance) {
+      goPrev();
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
     <div
-      className="w-full"
+      className="w-full touch-pan-y"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div className="mb-5 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
@@ -136,8 +172,9 @@ export default function BlogSlider({ blogs }: BlogSliderProps) {
 
       <div
         key={`${activeIndex}-${slidesPerView}`}
-        className={`grid gap-7 md:grid-cols-2 lg:grid-cols-3 ${direction === "next" ? "slider-enter-next" : "slider-enter-prev"
-          }`}
+        className={`grid gap-7 md:grid-cols-2 lg:grid-cols-3 ${
+          direction === "next" ? "slider-enter-next" : "slider-enter-prev"
+        }`}
       >
         {visibleBlogs.map((blog) => (
           <article
