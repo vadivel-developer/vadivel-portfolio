@@ -22,13 +22,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
- metadataBase: new URL("http://localhost:3000"),
+ metadataBase: new URL("https://vadivel-portfolio.vercel.app/"),
   title: {
-    default: "Vadivel T | Senior Web Developer Portfolio",
+    default: "Vadivel T | Web Developer Portfolio",
     template: "%s | Vadivel T",
   },
   description:
-    "Senior Web Developer portfolio of Vadivel T, specializing in WordPress, PHP, MySQL, React, Next.js, SEO, automation, AI-assisted development, MCP servers, and Docker hosting.",
+    "Web Developer Portfolio of Vadivel T, specializing in WordPress, PHP, MySQL, React, Next.js, SEO, automation, AI-assisted development, MCP servers, and Docker hosting.",
   keywords: [
     "Vadivel T",
     "Senior Web Developer",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Vadivel T | Senior Web Developer Portfolio",
+    title: "Vadivel T | Web Developer Portfolio",
     description:
       "Portfolio of a senior web developer focused on WordPress, PHP, React, Next.js, SEO, AI-assisted workflows and automation.",
     url: siteUrl,
@@ -59,13 +59,13 @@ export const metadata: Metadata = {
         url: "/images/profile.jpg",
         width: 1200,
         height: 630,
-        alt: "Vadivel T Senior Web Developer Portfolio",
+        alt: "Vadivel T Web Developer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vadivel T | Senior Web Developer Portfolio",
+    title: "Vadivel T | Web Developer Portfolio",
     description:
       "Senior Web Developer focused on WordPress, React, Next.js, SEO, automation and AI-assisted workflows.",
     images: ["/images/profile.jpg"],

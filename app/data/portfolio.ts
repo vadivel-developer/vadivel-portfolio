@@ -1,4 +1,4 @@
-export const siteUrl = "http://localhost:3000";
+export const siteUrl = "https://vadivel-portfolio.vercel.app";
 
 export const profile = {
   name: "Vadivel T",
@@ -9,12 +9,11 @@ export const profile = {
     "Web Developer with 4+ years of experience developing responsive, SEO-friendly, and high-performance websites using WordPress, Next.js, PHP, JavaScript, and MySQL. Experienced in custom WordPress development, Figma-to-WordPress conversion, website optimization, SEO audits, MCP testing, AI workflow automation, FastAPI-based MCP server development, Docker, Linux, and VPS hosting.",
 
   phone: "+91 9363637726",
-  whatsapp: "+919363637726",
+  whatsapp: "+91 9363637726",
   email: "vadivelwebdeveloper@gmail.com",
   location: "Chennai, India",
   linkedin: "https://www.linkedin.com/in/vadivel-developer/",
-  github: "https://github.com/vadivel-developer",
-  x: "https://x.com/",
+  github: "https://github.com/vadivel-developer"
 };
 
 export const projects = [

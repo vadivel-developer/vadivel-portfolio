@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ExperienceCard from "./components/ExperienceCard";
 import ProfileAvatar from "./components/ProfileAvatar";
@@ -11,10 +12,44 @@ import {
   experience,
   profile,
   projects as portfolioProjects,
+  siteUrl,
   skills,
 } from "./data/portfolio";
 import BlogSlider from "./components/BlogSlider";
 import ContactFormClient from "./components/ContactFormClient";
+
+export const metadata: Metadata = {
+  title: "Vadivel T | Web Developer Portfolio",
+  description:
+    "Explore Vadivel T’s web developer portfolio featuring WordPress, Next.js, PHP, MySQL, automation, AI workflows, SEO, hosting, and performance projects.",
+  alternates: {
+    canonical: `${siteUrl}/`,
+  },
+  openGraph: {
+    title: "Vadivel T | Web Developer Portfolio",
+    description:
+      "Explore Vadivel T’s web developer portfolio featuring WordPress, Next.js, PHP, MySQL, automation, AI workflows, SEO, hosting, and performance projects.",
+    url: `${siteUrl}/`,
+    siteName: "Vadivel Portfolio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vadivel T | Web Developer Portfolio",
+    description:
+      "Explore Vadivel T’s web developer portfolio featuring WordPress, Next.js, PHP, MySQL, automation, AI workflows, SEO, hosting, and performance projects.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
 
 const personSchema = {
   "@context": "https://schema.org",
@@ -23,8 +58,8 @@ const personSchema = {
   jobTitle: profile.role,
   email: profile.email,
   telephone: profile.phone,
-  url: profile.linkedin,
-  sameAs: [profile.linkedin, profile.github, profile.x],
+  url: siteUrl,
+  sameAs: [profile.linkedin, profile.github].filter(Boolean),
   knowsAbout: skills,
 };
 
@@ -59,8 +94,6 @@ export default function Home() {
             {profile.summary}
           </p>
 
-
-
           <div className="reveal-up reveal-delay-2 mt-5 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/pdf/vadivel-resume.pdf"
@@ -89,7 +122,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="experience-preview" className="section-space bg-[var(--bg-soft)]">
+      <section
+        id="experience-preview"
+        className="section-space bg-[var(--bg-soft)]"
+      >
         <div className="container-inner">
           <SectionHeader
             eyebrow="Experience"
@@ -99,7 +135,12 @@ export default function Home() {
 
           <div className="space-y-5">
             {experience.slice(0, 2).map((item, index) => (
-              <ExperienceCard key={item.role} item={item} index={index} showDetails />
+              <ExperienceCard
+                key={item.role}
+                item={item}
+                index={index}
+                showDetails
+              />
             ))}
           </div>
 
@@ -116,7 +157,7 @@ export default function Home() {
           <div className="mt-10 flex justify-center">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-sm font-semibold text-[var(--heading)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)] hover:gap-3"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-sm font-semibold text-[var(--heading)] shadow-sm transition hover:gap-3 hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
               View All Projects
               <i className="fa-solid fa-chevron-down text-xs" />
@@ -139,7 +180,6 @@ export default function Home() {
                 key={item.course}
                 className={`reveal-up reveal-delay-${index} card-premium mx-auto flex w-full max-w-[980px] flex-col gap-6 rounded-[1.5rem] p-6 md:flex-row md:items-center md:justify-between`}
               >
-                {/* Logo: Top on mobile, right side on desktop */}
                 <div className="order-1 flex shrink-0 items-center justify-start md:order-2 md:justify-end">
                   <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-3 shadow-sm md:h-24 md:w-24">
                     <img
@@ -150,7 +190,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Content: Below logo on mobile, left side on desktop */}
                 <div className="order-2 md:order-1">
                   <h3 className="font-heading text-xl font-semibold leading-tight text-[var(--heading)]">
                     {item.course}
@@ -205,7 +244,7 @@ export default function Home() {
           <div className="mt-10 flex justify-center">
             <Link
               href="/blogs"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-sm font-semibold text-[var(--heading)] shadow-sm transition hover:border-[var(--accent)] hover:text-[var(--accent)] hover:gap-3"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-6 py-3 text-sm font-semibold text-[var(--heading)] shadow-sm transition hover:gap-3 hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
               View All Blogs
               <i className="fa-solid fa-chevron-down text-xs" />
@@ -213,6 +252,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section className="section-space bg-[var(--bg)]">
         <div className="container-inner grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="reveal-up">
@@ -222,11 +262,11 @@ export default function Home() {
 
             <h2 className="font-heading text-3xl font-semibold tracking-[-0.035em] text-[var(--heading)] md:text-3xl">
               Ready to build an AI-assisted, high-performance website?
-
             </h2>
 
             <p className="mt-5 text-base font-medium leading-8 text-[var(--muted)]">
-              Available for WordPress development, AI-assisted frontend work, website optimization, SEO support, and automation workflow tasks.
+              Available for WordPress development, AI-assisted frontend work,
+              website optimization, SEO support, and automation workflow tasks.
             </p>
 
             <div className="mt-4 grid gap-3 text-sm font-semibold text-[var(--muted)]">

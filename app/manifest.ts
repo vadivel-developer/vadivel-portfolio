@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Vadivel T Portfolio",
     short_name: "Vadivel.dev",
-    description: "Senior Web Developer portfolio website.",
+    description: "Web Developer Portfolio website.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
