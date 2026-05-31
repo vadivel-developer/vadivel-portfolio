@@ -38,7 +38,7 @@ export default function ProjectCard({ project, index = 0 }: ProjectCardProps) {
           <i className="fa-solid fa-code text-sm" />
         </span>
 
-        <h3 className="font-heading text-2xl font-semibold leading-tight text-[var(--heading)]">
+        <h3 className="font-heading text-xxl font-semibold leading-tight text-[var(--heading)]">
           {project.title}
         </h3>
 

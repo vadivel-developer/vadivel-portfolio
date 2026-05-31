@@ -95,6 +95,25 @@ html[data-theme="peach"] {
 html {
   scroll-behavior: smooth;
 }
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+table {
+  max-width: 100%;
+}
 
 * {
   box-sizing: border-box;
@@ -106,6 +125,8 @@ body {
   color: var(--text);
   font-family: var(--font-body), system-ui, sans-serif;
 }
+
+
 
 h1,
 h2,
@@ -234,3 +255,34 @@ select {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@keyframes sliderNext {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes sliderPrev {
+  from {
+    opacity: 0;
+    transform: translateX(-28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.slider-enter-next {
+  animation: sliderNext 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slider-enter-prev {
+  animation: sliderPrev 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+

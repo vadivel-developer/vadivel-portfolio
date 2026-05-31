@@ -96,10 +96,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     notFound();
   }
 
-  const prevBlog =
-    currentIndex > 0
-      ? blogs[currentIndex - 1]
-      : null;
+  const prevBlog = currentIndex > 0 ? blogs[currentIndex - 1] : null;
 
   const nextBlog =
     currentIndex >= 0 && currentIndex < blogs.length - 1
@@ -115,65 +112,70 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     : [];
 
   return (
-    <main className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
-      <article className="section-space">
-        <div className="container-inner max-w-[1180px]">
-
-
-          <div className="overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] shadow-sm">
-            {/* Hero Image with Overlay Title */}
-            <div className="relative h-[340px] w-full overflow-hidden md:h-[300px]">
+    <main className="min-h-screen w-full overflow-x-hidden bg-[var(--bg-soft)] text-[var(--text)]">
+      <article className="section-space w-full overflow-x-hidden">
+        <div className="container-inner w-full max-w-[1180px] px-4 sm:px-6 lg:px-8">
+          <div className="card-premium w-full min-w-0 overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] shadow-sm">
+            {/* Hero Image */}
+            <div className="relative h-[330px] w-full min-w-0 overflow-hidden sm:h-[360px] md:h-[380px]">
               <img
                 src={blog.image}
                 alt={blog.title}
                 className="h-full w-full object-cover"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/20" />
 
-              <div className="absolute inset-0 flex items-center justify-center px-5 text-center">
-                <div className="max-w-4xl">
-                  <span className="inline-flex rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-[var(--accent)] shadow-sm backdrop-blur md:text-sm">
-                    {blog.tag}
-                  </span>
+              <div className="absolute inset-0 flex items-center justify-center px-4 text-center sm:px-6">
+                <div className="w-full max-w-4xl min-w-0">
+                  {blog.tag && (
+                    <span className="inline-flex rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-semibold text-[var(--accent)] shadow-sm backdrop-blur sm:px-4 sm:py-2 sm:text-sm">
+                      {blog.tag}
+                    </span>
+                  )}
 
-                  <h1 className="font-heading mt-5 text-3xl font-semibold leading-tight tracking-[-0.035em] text-white md:text-4xl">
+                  <h1 className="font-heading mx-auto mt-4 max-w-[900px] break-words text-2xl font-semibold leading-tight tracking-[-0.035em] text-white sm:text-2xl md:text-4xl">
                     {blog.title}
                   </h1>
 
-                  <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 text-white/85 md:text-base">
+                  <p className="mx-auto mt-4 max-w-3xl break-words text-sm font-medium leading-7 text-white/90 md:text-base">
                     {blog.desc}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="p-6 md:p-8">
+            {/* Blog Content */}
+            <div className="w-full min-w-0 max-w-full overflow-hidden p-5 sm:p-6 md:p-8">
               {sections.length > 0 && (
-                <div className="grid gap-10">
+                <div className="grid w-full min-w-0 max-w-full gap-9">
                   {sections.map((section, index) => {
                     const isDuplicateTitle =
                       index === 0 &&
                       section.heading.toLowerCase().trim() ===
-                      blog.title.toLowerCase().trim();
+                        blog.title.toLowerCase().trim();
 
                     return (
-                      <section key={`${section.heading}-${index}`}>
+                      <section
+                        key={`${section.heading}-${index}`}
+                        className="w-full min-w-0 max-w-full overflow-hidden"
+                      >
                         {!isDuplicateTitle && (
-                          <h2 className="font-heading text-xl font-semibold leading-tight text-[var(--heading)] md:text-2xl">
+                          <h2 className="font-heading max-w-full break-words text-xl font-semibold leading-tight text-[var(--heading)] md:text-2xl">
                             {section.heading}
                           </h2>
                         )}
 
                         <div
-                          className={`${isDuplicateTitle ? "mt-0" : "mt-4"
-                            } grid gap-4`}
+                          className={`${
+                            isDuplicateTitle ? "mt-0" : "mt-4"
+                          } grid w-full min-w-0 gap-4`}
                         >
                           {section.paragraphs.map(
                             (paragraph, paragraphIndex) => (
                               <p
                                 key={`${section.heading}-para-${paragraphIndex}`}
-                                className="text-sm font-medium leading-8 text-[var(--muted)] md:text-base"
+                                className="max-w-full break-words text-sm font-medium leading-7 text-[var(--muted)] md:text-base md:leading-8"
                               >
                                 {paragraph}
                               </p>
@@ -182,8 +184,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                         </div>
 
                         {section.table && (
-                          <div className="mt-6 overflow-x-auto rounded-2xl border border-[var(--border)]">
-                            <table className="w-full min-w-[720px] border-collapse bg-[var(--card)] text-left">
+                          <div className="mt-6 w-full min-w-0 max-w-full overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm">
+                            <table className="w-full min-w-[640px] border-collapse text-left">
                               <thead className="bg-[var(--bg-soft)]">
                                 <tr>
                                   {section.table.headers.map((header) => (
@@ -216,17 +218,19 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                         )}
 
                         {section.bullets && section.bullets.length > 0 && (
-                          <ul className="mt-5 grid gap-3 md:grid-cols-2 md:gap-x-8">
+                          <ul className="mt-5 grid w-full min-w-0 gap-3 md:grid-cols-2 md:gap-x-8">
                             {section.bullets.map((bullet) => (
                               <li
                                 key={bullet}
-                                className="flex items-start gap-3 text-sm font-medium leading-7 text-[var(--muted)] md:text-base"
+                                className="flex min-w-0 items-start gap-3 text-sm font-medium leading-7 text-[var(--muted)] md:text-base"
                               >
                                 <span className="mt-[8px] flex h-4 w-4 shrink-0 items-center justify-center">
                                   <i className="fa-solid fa-circle-check text-[12px] leading-none text-[var(--accent)]" />
                                 </span>
 
-                                <span>{bullet}</span>
+                                <span className="block min-w-0 flex-1 break-words">
+                                  {bullet}
+                                </span>
                               </li>
                             ))}
                           </ul>
@@ -238,11 +242,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               )}
 
               {sections.length === 0 && oldContent.length > 0 && (
-                <div className="grid gap-5">
+                <div className="grid w-full min-w-0 gap-5">
                   {oldContent.map((paragraph, index) => (
                     <p
                       key={`old-content-${index}`}
-                      className="text-sm font-medium leading-8 text-[var(--muted)] md:text-base"
+                      className="max-w-full break-words text-sm font-medium leading-7 text-[var(--muted)] md:text-base md:leading-8"
                     >
                       {paragraph}
                     </p>
@@ -250,12 +254,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 </div>
               )}
 
-              <div className="mt-12 border-t border-[var(--border)] pt-8">
+              <div className="mt-10 border-t border-[var(--border)] pt-7 md:mt-12 md:pt-8">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   {prevBlog ? (
                     <Link
                       href={`/blogs/${prevBlog.slug}`}
-                      className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] hover:gap-3"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:gap-3 hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] sm:w-fit"
                     >
                       <i className="fa-solid fa-arrow-left text-xs" />
                       Back Blog
@@ -263,7 +267,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                   ) : (
                     <Link
                       href="/blogs"
-                      className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] hover:gap-3"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:gap-3 hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] sm:w-fit"
                     >
                       <i className="fa-solid fa-arrow-left text-xs" />
                       Back to Blogs
@@ -273,7 +277,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                   {nextBlog && (
                     <Link
                       href={`/blogs/${nextBlog.slug}`}
-                      className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:gap-3 hover:opacity-90"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:gap-3 hover:opacity-90 sm:w-fit"
                     >
                       Next Blog
                       <i className="fa-solid fa-arrow-right text-xs" />
@@ -281,7 +285,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                   )}
                 </div>
               </div>
-
             </div>
           </div>
         </div>

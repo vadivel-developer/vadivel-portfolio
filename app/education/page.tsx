@@ -21,27 +21,31 @@ export default function EducationPage() {
             {education.map((item, index) => (
               <div
                 key={item.institution}
-                className={`reveal-up reveal-delay-${index} card-premium mx-auto flex w-full max-w-[980px] flex-col gap-5 rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-1 hover:border-[var(--accent)] sm:flex-row sm:items-start sm:justify-between md:p-6`}
+                className={`reveal-up reveal-delay-${index} card-premium mx-auto w-full max-w-[980px] rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-1 hover:border-[var(--accent)] md:p-6`}
               >
-                <div className="flex gap-4">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[var(--border)] bg-white p-2 shadow-sm md:h-20 md:w-20">
-                    <img
-                      src={item.logo}
-                      alt={`${item.institution} logo`}
-                      className="h-full w-full object-contain"
-                    />
+                <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+                  {/* Logo: top on mobile, left side on tablet/desktop */}
+                  <div className="flex shrink-0 items-center justify-start">
+                    <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-3 shadow-sm md:h-24 md:w-24">
+                      <img
+                        src={item.logo}
+                        alt={`${item.institution} logo`}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
                   </div>
 
-                  <div>
-                    <h2 className="font-heading text-lg font-semibold leading-snug text-[var(--heading)] md:text-xl">
+                  {/* Content */}
+                  <div className="min-w-0 flex-1">
+                    <h2 className="font-heading text-xl font-semibold leading-snug text-[var(--heading)] md:text-2xl">
                       {item.institution}
                     </h2>
 
-                    <p className="mt-1 text-sm font-medium leading-6 text-[var(--text)]">
+                    <p className="mt-2 text-sm font-semibold leading-6 text-[var(--text)] md:text-base">
                       {item.course}
                     </p>
 
-                    <p className="mt-1 text-sm font-medium text-[var(--muted)]">
+                    <p className="mt-2 text-sm font-semibold text-[var(--muted)]">
                       {item.period}
                     </p>
 
@@ -57,7 +61,7 @@ export default function EducationPage() {
                       </p>
                     )}
 
-                    <p className="mt-4 max-w-3xl text-sm font-medium leading-7 text-[var(--muted)]">
+                    <p className="mt-5 max-w-3xl text-sm font-medium leading-7 text-[var(--muted)] md:text-base">
                       {item.desc}
                     </p>
                   </div>

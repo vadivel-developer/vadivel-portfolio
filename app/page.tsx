@@ -36,7 +36,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
 
-      <section id="home" className="relative bg-[var(--bg)] py-20 md:py-10">
+      <section id="home" className="relative bg-[var(--bg)] py-10 md:py-10">
         <div className="absolute left-0 top-20 h-80 w-80 rounded-full bg-[var(--accent)]/10 blur-3xl" />
         <div className="absolute bottom-10 right-0 h-96 w-96 rounded-full bg-[var(--accent-2)]/10 blur-3xl" />
 
@@ -139,12 +139,24 @@ export default function Home() {
                 key={item.course}
                 className={`reveal-up reveal-delay-${index} card-premium mx-auto flex w-full max-w-[980px] flex-col gap-6 rounded-[1.5rem] p-6 md:flex-row md:items-center md:justify-between`}
               >
-                <div>
-                  <h3 className="font-heading text-xl font-semibold text-[var(--heading)]">
+                {/* Logo: Top on mobile, right side on desktop */}
+                <div className="order-1 flex shrink-0 items-center justify-start md:order-2 md:justify-end">
+                  <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-3 shadow-sm md:h-24 md:w-24">
+                    <img
+                      src={item.logo}
+                      alt={`${item.institution} logo`}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                </div>
+
+                {/* Content: Below logo on mobile, left side on desktop */}
+                <div className="order-2 md:order-1">
+                  <h3 className="font-heading text-xl font-semibold leading-tight text-[var(--heading)]">
                     {item.course}
                   </h3>
 
-                  <p className="mt-2 font-semibold text-[var(--accent)]">
+                  <p className="mt-2 font-semibold leading-7 text-[var(--accent)]">
                     {item.institution}
                   </p>
 
@@ -155,16 +167,6 @@ export default function Home() {
                   <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
                     {item.desc}
                   </p>
-                </div>
-
-                <div className="flex shrink-0 items-center justify-start md:justify-end">
-                  <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-3 shadow-sm md:h-24 md:w-24">
-                    <img
-                      src={item.logo}
-                      alt={`${item.institution} logo`}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
                 </div>
               </div>
             ))}
