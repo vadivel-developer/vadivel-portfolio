@@ -21,6 +21,7 @@ const poppins = Poppins({
   variable: "--font-body",
 });
 
+
 export const metadata: Metadata = {
  metadataBase: new URL("https://vadivel-portfolio.vercel.app/"),
   title: {
@@ -29,6 +30,10 @@ export const metadata: Metadata = {
   },
   description:
     "Web Developer Portfolio of Vadivel T, specializing in WordPress, PHP, MySQL, React, Next.js, SEO, automation, AI-assisted development, MCP servers, and Docker hosting.",
+
+     verification: {
+    google: "G3YZelPkyuCSEBL5YyyiBdKlfhClw4vAJX-8owMCKek",
+  },
   keywords: [
     "Vadivel T",
     "Senior Web Developer",
