@@ -42,7 +42,7 @@ export const projects = [
       "Semrush",
       "Ahrefs",
     ],
-    projectUrl: "https://www.sageitinc.com/",
+    projectUrl: "#",
     sections: [
       {
         heading: "Project Intro",
@@ -68,12 +68,7 @@ export const projects = [
           "Custom Templates",
         ],
         siteUrls: [
-          "https://www.sageitinc.com/",
-          "https://www.sageitinc.com/blog/",
-          "https://www.sageitinc.com/boomi-services/",
-          "https://www.sageitinc.com/artificial-intelligence/ai-services/",
-          "https://www.sageitinc.com/servicenow/",
-          "https://www.sageitinc.com/reference-center/",
+          "https://www.weblogicks.com/",
         ],
         bullets: [
           "Makes website content easy to update from the WordPress admin panel.",
@@ -99,12 +94,7 @@ export const projects = [
           "WordPress Hooks",
         ],
         siteUrls: [
-          "https://www.sageitinc.com/",
-          "https://www.sageitinc.com/blog/",
-          "https://www.sageitinc.com/boomi-services/",
-          "https://www.sageitinc.com/artificial-intelligence/ai-services/",
-          "https://www.sageitinc.com/servicenow/",
-          "https://www.sageitinc.com/reference-center/",
+          "https://www.weblogicks.com/",
         ],
         bullets: [
           "Adds custom functionality based on exact website requirements.",
@@ -156,7 +146,7 @@ export const projects = [
           "Caching Tools",
           "Image Optimization",
         ],
-        siteUrl: "https://www.sageitinc.com/",
+        siteUrl: "https://www.weblogicks.com/",
         bullets: [
           "Improves website loading speed and user experience.",
           "Helps improve Core Web Vitals and performance scores.",
@@ -446,7 +436,7 @@ export const experience = [
     location: "Chennai",
     role: "Web Developer",
     period: "2024 - Present",
-    logo: "/images/sageit-logo.svg",
+    logo: "/images/company-logo.svg",
     desc: "Building responsive, SEO-friendly, and high-performance websites with strong focus on WordPress customization, clean frontend UI, technical SEO, user experience, and performance optimization.",
     bullets: [
       "Developed SEO-friendly WordPress websites with custom themes, plugin customization, ACF dynamic content, and reusable sections.",
@@ -471,7 +461,7 @@ export const experience = [
   },
   {
     company: "Weblogicks",
-    location: "Chennai",
+    location: "Salem",
     role: "Web Designer",
     period: "2022 - 2024",
     logo: "/images/weblogicks-logo.png",

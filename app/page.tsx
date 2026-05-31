@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${siteUrl}/images/og/vadivel-webdeveloper-og.webp`,
+        url: `${siteUrl}/images/og/vadivel-webdeveloper.webp`,
         width: 1200,
         height: 630,
         alt: "Vadivel T Web Developer Portfolio",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     title: "Vadivel T | Web Developer Portfolio",
     description:
       "Web Developer with 4+ years of experience in WordPress, PHP, Next.js, SEO optimization, automation workflows, AI-assisted development, MCP servers, Docker, Linux, and web hosting.",
-    images: [`${siteUrl}/images/og/vadivel-webdeveloper-og.webp`],
+    images: [`${siteUrl}/images/og/vadivel-webdeveloper.webp`],
   },
   robots: {
     index: true,
