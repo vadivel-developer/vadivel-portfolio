@@ -1,6 +1,5 @@
 import SectionHeader from "../components/SectionHeader";
-import SkillCard from "../components/SkillCard";
-import { skills } from "../data/portfolio";
+import SkillsShowcase from "../components/SkillsShowcase";
 
 export const metadata = {
   title: "Skills",
@@ -9,20 +8,15 @@ export const metadata = {
 
 export default function SkillsPage() {
   return (
-    <main className="bg-[var(--bg-soft)] text-[var(--text)]">
+    <main className="min-h-screen text-[var(--text)]">
       <section className="section-space">
         <div className="container-inner">
           <SectionHeader
             eyebrow="Skills"
             title="Technical skills and tools"
-            desc="A focused skill stack covering frontend, WordPress, backend integration, SEO, analytics, AI and hosting."
+            desc="My stack by category: Next.js, WordPress, HubSpot CMS, AI and MCP, performance and SEO, and Linux and Docker."
           />
-
-          <div className="flex flex-wrap justify-center gap-3">
-            {skills.map((skill) => (
-              <SkillCard key={skill} skill={skill} />
-            ))}
-          </div>
+          <SkillsShowcase />
         </div>
       </section>
     </main>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects, siteUrl } from "../../data/portfolio";
+import Icon from "../../components/Icon";
 
 type ProjectDetailPageProps = {
   params: Promise<{
@@ -82,16 +83,12 @@ export default async function ProjectDetailPage({
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <article className="section-space">
-        <div className="container-inner max-w-[1180px]">
+        <div className="container-inner">
           <div className="overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] shadow-sm">
             <div className="relative h-[340px] w-full overflow-hidden md:h-[300px]">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="h-full w-full object-cover"
-              />
+              
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-soft)] to-[var(--bg-soft)]" />
 
               <div className="absolute inset-0 flex items-center justify-center px-5 text-center">
                 <div className="max-w-4xl">
@@ -99,11 +96,11 @@ export default async function ProjectDetailPage({
                     {project.tag}
                   </span>
 
-                  <h1 className="font-heading mt-5 text-3xl font-semibold leading-tight tracking-[-0.035em] text-white md:text-4xl">
+                  <h1 className="font-heading mt-5 text-3xl font-semibold leading-tight tracking-[-0.035em] text-[var(--heading)] md:text-4xl">
                     {project.title}
                   </h1>
 
-                  <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 text-white/85 md:text-base">
+                  <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 text-[var(--muted)] md:text-base">
                     {project.desc}
                   </p>
                 </div>
@@ -173,7 +170,7 @@ export default async function ProjectDetailPage({
                                     className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-4 text-sm font-semibold text-[var(--accent)] transition hover:bg-[var(--accent-soft)] md:odd:border-r"
                                   >
                                     <span className="break-all">{url}</span>
-                                    <i className="fa-solid fa-arrow-up-right-from-square shrink-0 text-xs" />
+                                    <Icon name="fa-solid fa-arrow-up-right-from-square" className="shrink-0 text-xs" />
                                   </a>
                                 );
                               })}
@@ -197,7 +194,7 @@ export default async function ProjectDetailPage({
               className="flex items-start gap-3 text-sm font-medium leading-7 text-[var(--muted)]"
             >
               <span className="mt-[8px] flex h-4 w-4 shrink-0 items-center justify-center">
-                <i className="fa-solid fa-circle-check text-[12px] leading-none text-[var(--accent)]" />
+                <Icon name="fa-solid fa-circle-check" className="text-[12px] leading-none text-[var(--accent)]" />
               </span>
 
               <span>{item}</span>
@@ -222,7 +219,7 @@ export default async function ProjectDetailPage({
                             className="mt-2 inline-flex items-center gap-2 break-all text-sm font-semibold text-[var(--accent)]"
                           >
                             {section.siteUrl}
-                            <i className="fa-solid fa-arrow-up-right-from-square text-xs" />
+                            <Icon name="fa-solid fa-arrow-up-right-from-square" className="text-xs" />
                           </a>
                         </div>
                       )}
@@ -240,7 +237,7 @@ export default async function ProjectDetailPage({
                                 className="flex items-start gap-3 text-sm font-medium leading-7 text-[var(--muted)]"
                               >
                                 <span className="mt-[8px] flex h-4 w-4 shrink-0 items-center justify-center">
-                                  <i className="fa-solid fa-circle-check text-[12px] leading-none text-[var(--accent)]" />
+                                  <Icon name="fa-solid fa-circle-check" className="text-[12px] leading-none text-[var(--accent)]" />
                                 </span>
 
                                 <span>{bullet}</span>
@@ -261,7 +258,7 @@ export default async function ProjectDetailPage({
                       href={`/projects/${prevProject.slug}`}
                       className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] hover:gap-3"
                     >
-                      <i className="fa-solid fa-arrow-left text-xs" />
+                      <Icon name="fa-solid fa-arrow-left" className="text-xs" />
                       Back Project
                     </Link>
                   ) : (
@@ -269,7 +266,7 @@ export default async function ProjectDetailPage({
                       href="/projects"
                       className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] hover:gap-3"
                     >
-                      <i className="fa-solid fa-arrow-left text-xs" />
+                      <Icon name="fa-solid fa-arrow-left" className="text-xs" />
                       Back to Projects
                     </Link>
                   )}
@@ -280,7 +277,7 @@ export default async function ProjectDetailPage({
                       className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:gap-3 hover:opacity-90"
                     >
                       Next Project
-                      <i className="fa-solid fa-arrow-right text-xs" />
+                      <Icon name="fa-solid fa-arrow-right" className="text-xs" />
                     </Link>
                   )}
                 </div>

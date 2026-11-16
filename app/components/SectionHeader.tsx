@@ -1,3 +1,6 @@
+import { Reveal } from "./Motion";
+
+/** Section heading: small gradient label, title, one line of description */
 export default function SectionHeader({
   eyebrow,
   title,
@@ -6,20 +9,16 @@ export default function SectionHeader({
   eyebrow: string;
   title: string;
   desc: string;
+  align?: "left" | "center";
 }) {
   return (
-    <div className="mx-auto mb-10 max-w-3xl text-center reveal-up">
-      <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[var(--accent)]">
+    <Reveal className="mb-8 max-w-xl">
+      <p className="inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+        <span className="h-[2px] w-6 rounded bg-[var(--accent)]" />
         {eyebrow}
       </p>
-
-      <h2 className="font-heading text-3xl font-semibold tracking-[-0.035em] text-[var(--heading)] md:text-4xl">
-        {title}
-      </h2>
-
-      <p className="mt-4 text-sm font-medium leading-7 text-[var(--muted)] md:text-base">
-        {desc}
-      </p>
-    </div>
+      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[var(--heading)] md:text-4xl">{title}</h2>
+      <p className="mt-3 text-[15px] leading-7 text-[var(--muted)]">{desc}</p>
+    </Reveal>
   );
 }

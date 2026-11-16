@@ -1,10 +1,11 @@
 import ExperienceCard from "../components/ExperienceCard";
+import { ScrollLine } from "../components/ScrollFx";
 import SectionHeader from "../components/SectionHeader";
 import { experience } from "../data/portfolio";
 
 export const metadata = {
   title: "Experience",
-  description: "Professional experience of Vadivel T as a senior web developer.",
+  description: "Professional experience of Vadivel T as a WordPress and HubSpot developer.",
 };
 
 export default function ExperiencePage() {
@@ -17,10 +18,10 @@ export default function ExperiencePage() {
           <SectionHeader
             eyebrow="Experience"
             title="Professional Journey"
-            desc="Current work focus across websites, AI-assisted workflows, automation testing and optimization."
+            desc="My work across Next.js, WordPress and HubSpot CMS, AI-assisted development, automation and performance."
           />
 
-          <div className="space-y-5">
+          <ScrollLine className="space-y-12">
             {validExperience.map((item, index) => (
               <ExperienceCard
                 key={`${item.role}-${item.period}`}
@@ -29,7 +30,7 @@ export default function ExperiencePage() {
                 showDetails
               />
             ))}
-          </div>
+          </ScrollLine>
         </div>
       </section>
     </main>

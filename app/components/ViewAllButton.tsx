@@ -1,19 +1,15 @@
 import Link from "next/link";
+import Icon from "./Icon";
 
-export default function ViewAllButton({
-  href,
-  label,
-}: {
-  href: string;
-  label: string;
-}) {
+/** Simple text link with an arrow */
+export default function ViewAllButton({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center justify-center gap-3 rounded-full border border-[var(--border)] bg-[var(--card)] px-7 py-3 text-sm font-semibold text-[var(--heading)] shadow-sm transition hover:-translate-y-1 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+      className="group inline-flex items-center gap-2 text-[15px] font-medium text-[var(--heading)] transition-colors hover:text-[var(--accent)]"
     >
-      {label}
-      <i className="fa-solid fa-chevron-down text-xs" />
+      <span className="border-b border-[var(--heading)]/30 pb-0.5 transition-colors group-hover:border-[var(--accent)]">{label}</span>
+      <Icon name="fa-solid fa-arrow-right" className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
     </Link>
   );
 }

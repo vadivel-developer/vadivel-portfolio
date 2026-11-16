@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Icon from "./Icon";
 
 type ContactResponse = {
   success?: boolean;
@@ -106,7 +107,7 @@ export default function ContactFormClient() {
   if (!mounted) {
     return (
       <div
-        className="reveal-up card-premium min-h-[520px] rounded-[1.5rem] p-5 md:p-6"
+        className="min-h-[420px]"
         suppressHydrationWarning
       />
     );
@@ -115,7 +116,7 @@ export default function ContactFormClient() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="reveal-up card-premium rounded-[1.5rem] p-5 md:p-6"
+      className="p-0"
       noValidate
       suppressHydrationWarning
     >
@@ -193,7 +194,7 @@ export default function ContactFormClient() {
           suppressHydrationWarning
           className="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--button)] px-6 py-3 text-sm font-semibold text-[var(--button-text)] transition hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <i className="fa-solid fa-paper-plane" />
+          <Icon name="fa-solid fa-paper-plane" />
           {isSubmitting ? "Sending..." : "Send Message"}
         </button>
 

@@ -1,16 +1,17 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
+import Icon from "./Icon";
 
 export type ThemeName = "light" | "dark" | "mint" | "sky" | "lavender" | "peach";
 
 export const themeOptions: { label: string; value: ThemeName; color: string }[] = [
-  { label: "Light", value: "light", color: "#087ea4" },
+  { label: "Airy", value: "light", color: "#7c6ee6" },
   { label: "Dark", value: "dark", color: "#22d3ee" },
-  { label: "Mint", value: "mint", color: "#059669" },
-  { label: "Sky", value: "sky", color: "#2563eb" },
-  { label: "Lavender", value: "lavender", color: "#7c3aed" },
-  { label: "Peach", value: "peach", color: "#ea580c" },
+  { label: "Mint", value: "mint", color: "#3f9d78" },
+  { label: "Sky", value: "sky", color: "#4a8bd0" },
+  { label: "Lilac", value: "lavender", color: "#8461d6" },
+  { label: "Peach", value: "peach", color: "#e0764f" },
 ];
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
@@ -23,7 +24,7 @@ export default function ThemeProvider({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
-export function ThemeIconSelector() {
+export function ThemeIconSelector({ up = false }: { up?: boolean }) {
   const [theme, setTheme] = useState<ThemeName>("light");
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -50,7 +51,7 @@ export function ThemeIconSelector() {
         className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-[var(--accent)] shadow-sm"
         suppressHydrationWarning
       >
-        <i className="fa-solid fa-circle-half-stroke" />
+        <Icon name="fa-solid fa-circle-half-stroke" />
       </div>
     );
   }
@@ -64,11 +65,11 @@ export function ThemeIconSelector() {
         aria-label="Change color theme"
         suppressHydrationWarning
       >
-        <i className="fa-solid fa-circle-half-stroke" />
+        <Icon name="fa-solid fa-circle-half-stroke" />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-12 z-50 grid w-44 gap-1 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-2 shadow-xl">
+        <div className={`absolute right-0 z-50 ${up ? "bottom-12" : "top-12"} grid w-44 gap-1 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-2 shadow-xl`}>
           {themeOptions.map((item) => (
             <button
               key={item.value}

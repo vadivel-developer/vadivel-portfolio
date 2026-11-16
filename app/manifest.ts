@@ -4,16 +4,16 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Vadivel T Portfolio",
     short_name: "Vadivel.dev",
-    description: "Web Developer Portfolio website.",
+    description: "Portfolio of Vadivel T, a WordPress and HubSpot developer.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#087ea4",
+    theme_color: "#6a58e0",
     icons: [
       {
-        src: "/images/profile.jpg",
+        src: "/icon.png",
         sizes: "512x512",
-        type: "image/jpeg",
+        type: "image/png",
       },
     ],
   };

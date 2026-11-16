@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogs, siteUrl } from "../../data/portfolio";
+import Icon from "../../components/Icon";
 
 type BlogDetailPageProps = {
   params: Promise<{
@@ -112,37 +113,25 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     : [];
 
   return (
-    <main className="min-h-screen w-full overflow-x-hidden bg-[var(--bg-soft)] text-[var(--text)]">
-      <article className="section-space w-full overflow-x-hidden">
-        <div className="container-inner w-full max-w-[1180px] px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen text-[var(--text)]">
+      <article className="py-8 md:py-10">
+        <div className="container-inner w-full">
           <div className="card-premium w-full min-w-0 overflow-hidden rounded-[1.5rem] border border-[var(--border)] bg-[var(--card)] shadow-sm">
-            {/* Hero Image */}
-            <div className="relative h-[330px] w-full min-w-0 overflow-hidden sm:h-[360px] md:h-[380px]">
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="h-full w-full object-cover"
-              />
+            {/* Compact header */}
+            <div className="w-full min-w-0 border-b border-[var(--border)] bg-gradient-to-br from-[var(--accent-soft)] to-[var(--bg-soft)] px-5 py-6 sm:px-6 md:px-8 md:py-7">
+              {blog.tag && (
+                <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-[var(--accent)] shadow-sm sm:text-xs">
+                  {blog.tag}
+                </span>
+              )}
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/20" />
+              <h1 className="mt-3 max-w-[900px] break-words text-xl font-semibold leading-tight tracking-tight text-[var(--heading)] sm:text-2xl md:text-[1.75rem]">
+                {blog.title}
+              </h1>
 
-              <div className="absolute inset-0 flex items-center justify-center px-4 text-center sm:px-6">
-                <div className="w-full max-w-4xl min-w-0">
-                  {blog.tag && (
-                    <span className="inline-flex rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-semibold text-[var(--accent)] shadow-sm backdrop-blur sm:px-4 sm:py-2 sm:text-sm">
-                      {blog.tag}
-                    </span>
-                  )}
-
-                  <h1 className="font-heading mx-auto mt-4 max-w-[900px] break-words text-2xl font-semibold leading-tight tracking-[-0.035em] text-white sm:text-2xl md:text-4xl">
-                    {blog.title}
-                  </h1>
-
-                  <p className="mx-auto mt-4 max-w-3xl break-words text-sm font-medium leading-7 text-white/90 md:text-base">
-                    {blog.desc}
-                  </p>
-                </div>
-              </div>
+              <p className="mt-2 max-w-3xl break-words text-[13.5px] leading-6 text-[var(--muted)] md:text-sm">
+                {blog.desc}
+              </p>
             </div>
 
             {/* Blog Content */}
@@ -154,6 +143,18 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                       index === 0 &&
                       section.heading.toLowerCase().trim() ===
                         blog.title.toLowerCase().trim();
+
+                    // a paragraph ending with ":" introduces the bullet list: show it right above the
+                    // list and move any follow-up paragraphs below the list
+                    const hasBullets = !!section.bullets && section.bullets.length > 0;
+                    let leadIdx = -1;
+                    if (hasBullets) {
+                      section.paragraphs.forEach((p, i) => {
+                        if (p.trim().endsWith(":")) leadIdx = i;
+                      });
+                    }
+                    const beforeList = leadIdx >= 0 ? section.paragraphs.slice(0, leadIdx + 1) : section.paragraphs;
+                    const afterList = leadIdx >= 0 ? section.paragraphs.slice(leadIdx + 1) : [];
 
                     return (
                       <section
@@ -171,7 +172,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                             isDuplicateTitle ? "mt-0" : "mt-4"
                           } grid w-full min-w-0 gap-4`}
                         >
-                          {section.paragraphs.map(
+                          {beforeList.map(
                             (paragraph, paragraphIndex) => (
                               <p
                                 key={`${section.heading}-para-${paragraphIndex}`}
@@ -225,7 +226,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                                 className="flex min-w-0 items-start gap-3 text-sm font-medium leading-7 text-[var(--muted)] md:text-base"
                               >
                                 <span className="mt-[8px] flex h-4 w-4 shrink-0 items-center justify-center">
-                                  <i className="fa-solid fa-circle-check text-[12px] leading-none text-[var(--accent)]" />
+                                  <Icon name="fa-solid fa-circle-check" className="text-[12px] leading-none text-[var(--accent)]" />
                                 </span>
 
                                 <span className="block min-w-0 flex-1 break-words">
@@ -234,6 +235,19 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                               </li>
                             ))}
                           </ul>
+                        )}
+
+                        {afterList.length > 0 && (
+                          <div className="mt-5 grid w-full min-w-0 gap-4">
+                            {afterList.map((paragraph, i) => (
+                              <p
+                                key={`${section.heading}-after-${i}`}
+                                className="max-w-full break-words text-sm font-medium leading-7 text-[var(--muted)] md:text-base md:leading-8"
+                              >
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
                         )}
                       </section>
                     );
@@ -261,7 +275,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                       href={`/blogs/${prevBlog.slug}`}
                       className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:gap-3 hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] sm:w-fit"
                     >
-                      <i className="fa-solid fa-arrow-left text-xs" />
+                      <Icon name="fa-solid fa-arrow-left" className="text-xs" />
                       Back Blog
                     </Link>
                   ) : (
@@ -269,7 +283,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                       href="/blogs"
                       className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)] px-5 py-2.5 text-sm font-semibold text-[var(--accent)] shadow-sm transition hover:gap-3 hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] sm:w-fit"
                     >
-                      <i className="fa-solid fa-arrow-left text-xs" />
+                      <Icon name="fa-solid fa-arrow-left" className="text-xs" />
                       Back to Blogs
                     </Link>
                   )}
@@ -280,7 +294,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                       className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:gap-3 hover:opacity-90 sm:w-fit"
                     >
                       Next Blog
-                      <i className="fa-solid fa-arrow-right text-xs" />
+                      <Icon name="fa-solid fa-arrow-right" className="text-xs" />
                     </Link>
                   )}
                 </div>

@@ -1,43 +1,39 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Be_Vietnam_Pro, Poppins } from "next/font/google";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "./components/ThemeProvider";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
 import WhatsAppButton from "./components/WhatsAppButton";
+import ChatWidget from "./components/ChatWidget";
 import { profile, siteUrl } from "./data/portfolio";
 
-const beVietnamPro = Be_Vietnam_Pro({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["600"],
-  variable: "--font-heading",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-body",
+  display: "swap",
 });
-
 
 export const metadata: Metadata = {
  metadataBase: new URL("https://vadivel-portfolio.vercel.app/"),
   title: {
-    default: "Vadivel T | Web Developer Portfolio",
+    default: "Vadivel T | WordPress & HubSpot Developer",
     template: "%s | Vadivel T",
   },
   description:
-    "Web Developer Portfolio of Vadivel T, specializing in WordPress, PHP, MySQL, React, Next.js, SEO, automation, AI-assisted development, MCP servers, and Docker hosting.",
+    "Portfolio of Vadivel T, a web developer with 5+ years of experience in Next.js, React, WordPress, PHP and HubSpot CMS, building fast, SEO-friendly websites, MCP servers and AI-assisted development workflows.",
 
      verification: {
     google: "G3YZelPkyuCSEBL5YyyiBdKlfhClw4vAJX-8owMCKek",
   },
   keywords: [
     "Vadivel T",
-    "Senior Web Developer",
+    "Web Developer",
     "WordPress Developer",
+    "HubSpot Developer",
+    "HubSpot CMS Developer",
     "PHP Developer",
     "Next.js Developer",
     "React Developer",
@@ -52,16 +48,16 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "Vadivel T | Web Developer Portfolio",
+    title: "Vadivel T | WordPress & HubSpot Developer",
     description:
-      "Portfolio of a senior web developer focused on WordPress, PHP, React, Next.js, SEO, AI-assisted workflows and automation.",
+      "Portfolio of a web developer focused on Next.js, WordPress, HubSpot CMS, SEO, AI-assisted workflows and automation.",
     url: siteUrl,
     siteName: "Vadivel T Portfolio",
     type: "website",
     locale: "en_IN",
     images: [
       {
-        url: "/images/profile.jpg",
+        url: "/images/og/vadivel-webdeveloper.jpg",
         width: 1200,
         height: 630,
         alt: "Vadivel T Web Developer Portfolio",
@@ -70,10 +66,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vadivel T | Web Developer Portfolio",
+    title: "Vadivel T | WordPress & HubSpot Developer",
     description:
-      "Senior Web Developer focused on WordPress, React, Next.js, SEO, automation and AI-assisted workflows.",
-    images: ["/images/profile.jpg"],
+      "Web developer focused on Next.js, WordPress, HubSpot CMS, SEO, automation and AI-assisted workflows.",
+    images: ["/images/og/vadivel-webdeveloper.jpg"],
   },
   robots: {
     index: true,
@@ -91,12 +87,16 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${beVietnamPro.variable} ${poppins.variable}`}>
+      <body className={`${inter.variable}`}>
+        <noscript>
+          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <ThemeProvider>
           <Navbar />
           {children}
           <Footer />
           <WhatsAppButton />
+          <ChatWidget />
         </ThemeProvider>
       </body>
     </html>

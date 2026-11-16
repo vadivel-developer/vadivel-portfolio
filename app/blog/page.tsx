@@ -9,7 +9,7 @@ export default function BlogPage() {
           <SectionHeader
             eyebrow="Blog"
             title="Writing and technical notes"
-            desc="Topics I can write about from my web development, SEO, automation and AI-assisted development experience."
+            desc="Practical notes on web development, SEO, automation and AI-assisted development."
           />
 
           <div className="grid gap-6 md:grid-cols-3">
